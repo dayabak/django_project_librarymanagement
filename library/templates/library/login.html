@@ -1,0 +1,43 @@
+{% extends "library/base.html" %}
+
+{% block title %}User Login{% endblock title %}
+
+{% block content %}
+
+	<div class="col-md-8 mt-4 mx-auto">
+		<div class="card my-shadow">
+			<div class="card-header">
+				<h1 class="display-4 mb-4">Admin Login</h1>
+			</div>
+			<div class="card-body">
+				
+				<form method="POST" action="">
+					{% csrf_token %}
+					<div class="mb-3">
+						<label for="lg_email" class="form-label">Email</label>
+						<input type="text" class="form-control" id="lg_email" name="username">
+					</div>
+					<div class="mb-3">
+						<label for="lg_pass" class="form-label">Password</label>
+						<input type="password" class="form-control" id="lg_pass" name="password">
+					</div>
+
+					<button type="submit" class="btn btn-primary">Login</button>
+					<br />
+					{{form.errors}}
+					{% for message in messages %}
+						<p class="django_message">{{message}}</p>
+					{% endfor %}
+					<br />
+					<div class="my-3">
+						<div class="d-flex">
+							Don't have an account?&nbsp;<a href="{% url 'register' %}">Register</a>
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}

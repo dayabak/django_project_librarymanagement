@@ -1,0 +1,56 @@
+{% extends "library/base.html" %}
+
+{% block title %}Manage Books{% endblock title %}
+
+{% block content %}
+	<div class="col-md-12 mt-4 mx-auto">
+		<div class="card my-shadow">
+			<div class="card-header">
+				<h1 class="display-4 mb-4">Manage Books</h1>
+			</div>
+			<div class="card-body">
+
+				<table class="table">
+					<thead>
+						<tr>
+							<td>
+								Book Name
+							</td>
+							<td>
+								Author
+							</td>
+							<td>
+								ISBN
+							</td>
+							<td>
+								Publisher
+							</td>
+							<td>
+								Actions
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+						{% for book in book_list %}
+							<tr>
+								<td> {{book.name}} </td>
+								<td> {{book.author}} </td>
+								<td> {{book.isbn}} </td>
+								<td> {{book.publisher}} </td>
+								<td>
+									<a class="btn btn-success" href="{% url 'updateBook' book.id %}">edit</a>
+									<form action="{% url 'deleteBook' book.id %}" method="post" class="d-inline">
+										{% csrf_token %}
+										<button type="submit" class="btn btn-danger">delete</button>
+									</form>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

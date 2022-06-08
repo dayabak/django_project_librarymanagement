@@ -1,0 +1,39 @@
+{% extends "library/base.html" %}
+
+{% block title %}User Registration{% endblock title %}
+
+{% block content %}
+
+	<div class="col-md-8 mt-4 mx-auto">
+		<div class="card my-shadow">
+			<div class="card-header">
+				<h1 class="display-4 mb-4">Admin Registration</h1>
+			</div>
+			<div class="card-body">
+				<form method="POST" action="">
+					{% csrf_token %}
+					{% for field in form %}
+					<div class="mb-3">
+						<label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+						{{ field }}
+					</div>
+					{% endfor %}
+
+					<button type="submit" class="btn btn-primary">Register</button>
+					<br />
+					{{form.errors}}
+					{% for message in messages %}
+						<p class="django_message">{{message}}</p>
+					{% endfor %}
+					<br />
+					<div class="my-3">
+						<div class="d-flex">
+							Already registered?&nbsp;<a href="{% url 'login' %}">Login</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}

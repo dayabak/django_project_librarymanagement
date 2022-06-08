@@ -1,0 +1,46 @@
+{% extends "library/base.html" %}
+
+{% block title %}Book List{% endblock title %}
+
+{% block content %}
+
+	<div class="col-md-12 mt-4 mx-auto">
+		<div class="card my-shadow">
+			<div class="card-header">
+				<h1 class="display-4 mb-4">Books</h1>
+			</div>
+			<div class="card-body">
+
+				<table class="table">
+					<thead>
+						<tr>
+							<td>
+								Book Name
+							</td>
+							<td>
+								Author
+							</td>
+							<td>
+								ISBN
+							</td>
+							<td>
+								Publisher
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+						{% for book in book_list %}
+							<tr>
+								<td> {{book.name}} </td>
+								<td> {{book.author}} </td>
+								<td> {{book.isbn}} </td>
+								<td> {{book.publisher}} </td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+{% endblock %}

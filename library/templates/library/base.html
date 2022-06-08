@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=Library, initial-scale=1.0">
+	<title>{% block title %}{% endblock title %}</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		body {
+			background-color: white;
+		}
+		.django_message {
+			padding: 5px;
+			background: gray;
+			color:aliceblue;
+			display: inline-block;
+			margin-top: 10px;
+			font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+		}
+		.errorlist {
+			color: red;
+			list-style: none;
+		}
+		.my-shadow {
+			box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+		}
+	</style>
+</head>
+<body>
+	
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="{% url 'books_list' %}">My Library</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'books_list' %}">View Books</a>
+					</li>
+					{% if request.user.is_authenticated %}
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'addBook' %}">Add a Book</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'manageBooks' %}">Manage Books</a>
+						</li>
+					{% endif %}
+				</ul>
+				{% if request.user.is_authenticated %}
+					<span style="color:white;" class="navbar-text mx-2">Hello, {{request.user}}</span>
+					<span class="mx-2">
+						<a href="{% url 'logout' %}">logout</a>
+					</span>
+				{% else %}
+					<span class="mx-2">
+						<a href="{% url 'login' %}">Login as Admin</a>
+					</span>
+				{% endif %}
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="row my-5">
+			{% block content %}
+
+			{% endblock content %}
+		</div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
